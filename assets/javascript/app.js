@@ -1,15 +1,9 @@
 $(document).ready(function() {
-//Array for searched topics to be added
 var topics = [];
 
-	//Function with AJAX call to GIPHY; Q parameterc for API link set to search term, limit 10 results
-  //Create div with respective still and animate image sources with "data-state", "data-still" and "data-animate" attributes
- 	function displayNetflixShow() {
+var movie = $(this).data("search");
 
-	var x = $(this).data("search");
-	console.log(x);
-
-	var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + x + "&api_key=dc6zaTOxFJmzC&limit=10";
+var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + movie + "&api_key=dc6zaTOxFJmzC&limit=10";
 
 	console.log(queryURL);
 
@@ -30,7 +24,7 @@ var topics = [];
         	var p = $("<p>").text("Rating: " + rating);
 
         	showImage.attr("src", staticSrc);
-        	showImage.addClass("netflixGiphy");
+        	showImage.addClass("disneyGiphy");
         	showImage.attr("data-state", "still");
         	showImage.attr("data-still", staticSrc);
         	showImage.attr("data-animate", defaultAnimatedSrc);
@@ -42,17 +36,16 @@ var topics = [];
 	});
 }
 
-  //Submit button click event takes search term from form input, trims and pushes to topics array, displays button
-	$("#addShow").on("click", function(event) {
+	$("#addMovie").on("click", function(event) {
         event.preventDefault();
-        var newShow = $("#netflixInput").val().trim();
-        topics.push(newShow);
+        var newMovie = $("#disneyInput").val().trim();
+        topics.push(newMovie);
         console.log(topics);
-        $("#netflixInput").val('');
+        $("#disneyInput").val('');
         displayButtons();
       });
 
-  //Function iterates through topics array to display button with array values in "myButtons" section of HTML
+ 
 	function displayButtons() {
     $("#myButtons").empty();
     for (var i = 0; i < topics.length; i++) {
@@ -67,13 +60,13 @@ var topics = [];
 
   displayButtons();
 
-  //Click event on button with id of "show" executes displayNetflixShow function
-  $(document).on("click", "#show", displayNetflixShow);
 
-  //Click event on gifs with class of "netflixGiphy" executes pausePlayGifs function
-  $(document).on("click", ".netflixGiphy", pausePlayGifs);
+  $(document).on("click", "#show", displayDisneyMovie);
 
-  //Function accesses "data-state" attribute and depending on status, changes image source to "data-animate" or "data-still"
+
+  $(document).on("click", ".disneyGiphy", pausePlayGifs);
+
+
   function pausePlayGifs() {
   	 var state = $(this).attr("data-state");
       if (state === "still") {
