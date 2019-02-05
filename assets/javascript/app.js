@@ -6,7 +6,7 @@ function displayDisneyMovie() {
 var movie = $(this).data("search");
   console.log(movie);
 
-var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + movie + "&api_key=dc6zaTOxFJmzC&limit=10";
+var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + movie + "&api_key=dc6zaTOxFJmzC&limit=12";
   console.log(queryURL);
 
   $.ajax({
